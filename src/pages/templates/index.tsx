@@ -59,6 +59,7 @@ const Templates = ({
                         title={template?.name}
                         subtext={template?.description}
                         footerText="Use Template"
+                        link={template?.link}
                     />
                 ))}
             {searchItems &&
@@ -68,6 +69,7 @@ const Templates = ({
                         title={template?.name}
                         subtext={template?.description}
                         footerText="Use Template"
+                        link={template?.link}
                     />
                 ))}
 
@@ -78,6 +80,7 @@ const Templates = ({
                         title={template?.name}
                         subtext={template?.description}
                         footerText="Use Template"
+                        link={template?.link}
                     />
                 ))}
 
@@ -88,6 +91,7 @@ const Templates = ({
                         title={template?.name}
                         subtext={template?.description}
                         footerText="Use Template"
+                        link={template?.link}
                     />
                 ))}
         </div>

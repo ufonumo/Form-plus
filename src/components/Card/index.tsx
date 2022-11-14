@@ -4,9 +4,10 @@ export interface CardProps {
     title: string
     subtext: string
     footerText: string
+    link: string
 }
 
-const Card = ({ title, subtext, footerText }: CardProps) => {
+const Card = ({ title, subtext, footerText, link }: CardProps) => {
     return (
         <div className="card_container">
             <div className="card__header">
@@ -14,7 +15,9 @@ const Card = ({ title, subtext, footerText }: CardProps) => {
                 <p className="card__subtext">{subtext}</p>
             </div>
             <div className="card__footer">
-                <p className="card__footer--text">{footerText}</p>
+                <a href={link} className="card__footer--text">
+                    {footerText}
+                </a>
             </div>
         </div>
     )

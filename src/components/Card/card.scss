@@ -25,12 +25,13 @@
     }
     .card__footer {
         background: #f9f9f9;
-        padding: 0.4rem 1.5rem;
+        padding: 1rem 1.5rem;
         &--text {
             font-weight: 400;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 18px;
             color: #08bd37;
+            text-decoration: none;
         }
     }
 }
