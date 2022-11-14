@@ -11,8 +11,8 @@ const Select = ({ options, title, handleChange }: SelectProps) => {
         <fieldset className="field__set">
             <legend className="field__legend">{title}</legend>
             <select
-                name=""
-                id=""
+                name={title}
+                id={title}
                 className="field__select"
                 onChange={(e) => handleChange(e)}
             >

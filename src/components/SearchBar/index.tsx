@@ -18,7 +18,7 @@ const SearchBar = ({ text, handleSearch, value }: SearchBarProps) => {
                 }}
                 name="search"
                 className="search__bar"
-                defaultValue={value}
+                value={value}
             />
             <button type="button" className="btn__search">
                 <img

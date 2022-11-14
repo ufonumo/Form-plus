@@ -33,20 +33,10 @@ const Home = () => {
         setCurrentPage(pageNumber)
     }
 
-    useEffect(() => {
-        if (searchItems) {
-            dispatch(getTemplates(searchItems))
-        }
-        if (category) {
-            dispatch(getTemplates(category))
-        }
-        dispatch(getTemplates(""))
-    }, [dispatch, searchItems, category])
-
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        setCategory("")
         setSearchItems(e.target.value)
+        setCategory("")
     }
 
     const previousClickHandler = () => {
@@ -58,10 +48,20 @@ const Home = () => {
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
-        setSearchItems("")
         setCategory(e.target.value)
-        console.log(e.target.value)
+        setSearchItems("")
+        console.log(searchItems, "searchItems")
     }
+
+    useEffect(() => {
+        if (searchItems) {
+            dispatch(getTemplates(searchItems))
+        }
+        if (category) {
+            dispatch(getTemplates(category))
+        }
+        dispatch(getTemplates(""))
+    }, [dispatch, searchItems, category])
 
     return (
         <div className="home__container">
@@ -101,8 +101,8 @@ const Home = () => {
             </div>
 
             {templateData.loading && (
-                <div>
-                    <CgSpinner className="animate-spin " />
+                <div className="loader">
+                    <CgSpinner size={50} />
                 </div>
             )}
 
