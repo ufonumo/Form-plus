@@ -7,23 +7,21 @@ import { Pagination } from "../../components/Pagination"
 import { getTemplates } from "../../features/home/homeSlice"
 import Templates from "../templates"
 import Loader from "../../assets/loader.gif"
+import { categoryData, dateData, orderData } from "../../app/data"
 
 const Home = () => {
-    const categoryData = ["All", "Education", "E-commerce", "Health"]
-    const orderData = ["Default", "Ascending", "Descending"]
-    const dateData = ["Default", "Ascending", "Descending"]
-
     const dispatch = useAppDispatch()
     const [searchItems, setSearchItems] = useState("")
     const [category, setCategory] = useState("All")
     const [order, setOrder] = useState("Default")
     const [date, setDate] = useState("Default")
+    const [currentPage, setCurrentPage] = useState(1)
+
     const templateData: any = useSelector(
         (state: RootState) => state?.TemplateSlice
     )
 
     let [itemsPerPage] = useState(15)
-    const [currentPage, setCurrentPage] = useState(1)
     const indexOfLastItem = currentPage * itemsPerPage
     const indexOfFirstItem = indexOfLastItem - itemsPerPage
     const currentTemplate = templateData.templates.slice(
@@ -35,6 +33,7 @@ const Home = () => {
         setCurrentPage(pageNumber)
     }
 
+    // function that handles the search
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setSearchItems(e.target.value)
@@ -43,13 +42,17 @@ const Home = () => {
         setDate("Default")
     }
 
+    // function that handles the previous pagination button
     const previousClickHandler = () => {
         setCurrentPage(currentPage - 1)
     }
+
+    // function that handles the next pagination button
     const nextClickHandler = () => {
         setCurrentPage(currentPage + 1)
     }
 
+    // function that handles the category select
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
         setCategory(e.target.value)
@@ -58,6 +61,7 @@ const Home = () => {
         setDate("Default")
     }
 
+    // function that handles the order select
     const handleOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
         setOrder(e.target.value)
@@ -66,6 +70,7 @@ const Home = () => {
         setDate("Default")
     }
 
+    // function that handles the date select
     const handleDateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
         setOrder("")
