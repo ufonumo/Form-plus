@@ -6,7 +6,7 @@ import { SearchBar, Select, WarningMessage } from "../../components"
 import { Pagination } from "../../components/Pagination"
 import { getTemplates } from "../../features/home/homeSlice"
 import Templates from "../templates"
-import { CgSpinner } from "react-icons/cg"
+import Loader from "../../assets/loader.gif"
 
 const Home = () => {
     const categoryData = ["All", "Education", "E-commerce", "Health"]
@@ -16,6 +16,8 @@ const Home = () => {
     const dispatch = useAppDispatch()
     const [searchItems, setSearchItems] = useState("")
     const [category, setCategory] = useState("All")
+    const [order, setOrder] = useState("Default")
+    const [date, setDate] = useState("Default")
     const templateData: any = useSelector(
         (state: RootState) => state?.TemplateSlice
     )
@@ -37,6 +39,8 @@ const Home = () => {
         e.preventDefault()
         setSearchItems(e.target.value)
         setCategory("")
+        setOrder("Default")
+        setDate("Default")
     }
 
     const previousClickHandler = () => {
@@ -50,7 +54,24 @@ const Home = () => {
         e.preventDefault()
         setCategory(e.target.value)
         setSearchItems("")
-        console.log(searchItems, "searchItems")
+        setOrder("Default")
+        setDate("Default")
+    }
+
+    const handleOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault()
+        setOrder(e.target.value)
+        setCategory("")
+        setSearchItems("")
+        setDate("Default")
+    }
+
+    const handleDateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault()
+        setOrder("")
+        setSearchItems("")
+        setDate(e.target.value)
+        setCategory("")
     }
 
     useEffect(() => {
@@ -60,8 +81,14 @@ const Home = () => {
         if (category) {
             dispatch(getTemplates(category))
         }
+        if (order) {
+            dispatch(getTemplates(order))
+        }
+        if (date) {
+            dispatch(getTemplates(date))
+        }
         dispatch(getTemplates(""))
-    }, [dispatch, searchItems, category])
+    }, [dispatch, searchItems, category, order, date])
 
     return (
         <div className="home__container">
@@ -79,22 +106,29 @@ const Home = () => {
                         title="Category"
                         options={categoryData}
                         handleChange={(e) => handleCategoryChange(e)}
+                        value={category}
                     />
                     <Select
                         title="Order"
                         options={orderData}
-                        handleChange={() => {}}
+                        handleChange={(e) => {
+                            handleOrderChange(e)
+                        }}
+                        value={order}
                     />
                     <Select
                         title="Date"
                         options={dateData}
-                        handleChange={() => {}}
+                        handleChange={(e) => {
+                            handleDateChange(e)
+                        }}
+                        value={date}
                     />
                 </div>
             </div>
             <WarningMessage />
             <div className="home__card--container">
-                <p className="template__name">{category} Templates</p>
+                <p className="template__name">{category || "All"} Templates</p>
                 <p className="template__found">
                     {templateData.templates.length} templates
                 </p>{" "}
@@ -102,7 +136,7 @@ const Home = () => {
 
             {templateData.loading && (
                 <div className="loader">
-                    <CgSpinner size={50} />
+                    <img src={Loader} alt="loader" />
                 </div>
             )}
 
@@ -114,6 +148,8 @@ const Home = () => {
                         currentTemplate={currentTemplate}
                         searchItems={searchItems}
                         category={category}
+                        order={order}
+                        date={date}
                     />
 
                     <Pagination

@@ -4,15 +4,20 @@ interface ITemplatesProps {
     currentTemplate: any
     searchItems: string
     category: string
+    order: string
+    date: string
 }
 
 const Templates = ({
     currentTemplate,
     searchItems,
     category,
+    order,
+    date,
 }: ITemplatesProps) => {
     let searchedTemplates
     let categoryTemplates
+    let sortedTemplates
 
     if (searchItems) {
         searchedTemplates = currentTemplate.filter((template: any) =>
@@ -30,6 +35,18 @@ const Templates = ({
                 return category.toLowerCase().includes(category.toLowerCase())
             })
         )
+    }
+
+    if (order || date) {
+        sortedTemplates = currentTemplate.sort((a: any, b: any) => {
+            if (a.created < b.created) {
+                return -1
+            }
+            if (a.created > b.created) {
+                return 1
+            }
+            return 0
+        })
     }
 
     return (
@@ -56,6 +73,16 @@ const Templates = ({
 
             {category &&
                 categoryTemplates.map((template: any, index: number) => (
+                    <Card
+                        key={index}
+                        title={template?.name}
+                        subtext={template?.description}
+                        footerText="Use Template"
+                    />
+                ))}
+
+            {order &&
+                sortedTemplates.map((template: any, index: number) => (
                     <Card
                         key={index}
                         title={template?.name}
