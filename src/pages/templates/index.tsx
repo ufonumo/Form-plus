@@ -38,14 +38,9 @@ const Templates = ({
     }
 
     if (order || date) {
-        sortedTemplates = currentTemplate.sort((a: any, b: any) => {
-            if (a.created < b.created) {
-                return -1
-            }
-            if (a.created > b.created) {
-                return 1
-            }
-            return 0
+        sortedTemplates = currentTemplate.sort(function (x: any, y: any) {
+            console.log(x.created)
+            return x.created - y.created
         })
     }
 

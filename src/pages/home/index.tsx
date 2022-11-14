@@ -75,18 +75,6 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if (searchItems) {
-            dispatch(getTemplates(searchItems))
-        }
-        if (category) {
-            dispatch(getTemplates(category))
-        }
-        if (order) {
-            dispatch(getTemplates(order))
-        }
-        if (date) {
-            dispatch(getTemplates(date))
-        }
         dispatch(getTemplates(""))
     }, [dispatch, searchItems, category, order, date])
 
