@@ -37,10 +37,18 @@ const Templates = ({
         )
     }
 
-    if (order || date) {
-        sortedTemplates = currentTemplate.sort(function (x: any, y: any) {
-            return x.created - y.created
+    if (order === "Ascending" || date) {
+        sortedTemplates = currentTemplate.sort(function (a: any, b: any) {
+            var nameA = a.name.toLowerCase(),
+                nameB = b.name.toLowerCase()
+            if (nameA < nameB)
+                //sort string ascending
+                return -1
+            if (nameA > nameB) return 1
+            return 0 //default return value (no sorting)
         })
+    } else if (order === "Descending") {
+        sortedTemplates = currentTemplate.reverse()
     }
 
     return (
