@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../app/store"
 import { SearchBar, Select, WarningMessage } from "../../components"
 import { Pagination } from "../../components/Pagination"
 import { getTemplates } from "../../features/home/homeSlice"
-import Templates from "../templates"
+import Templates from "../../components/templates"
 import Loader from "../../assets/loader.gif"
 import { categoryData, dateData, orderData } from "../../app/data"
 
@@ -13,8 +13,8 @@ const Home = () => {
     const dispatch = useAppDispatch()
     const [searchItems, setSearchItems] = useState("")
     const [category, setCategory] = useState("All")
-    const [order, setOrder] = useState("Default")
-    const [date, setDate] = useState("Default")
+    const [order, setOrder] = useState("")
+    const [date, setDate] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
 
     const templateData: any = useSelector(
@@ -38,8 +38,8 @@ const Home = () => {
         e.preventDefault()
         setSearchItems(e.target.value)
         setCategory("")
-        setOrder("Default")
-        setDate("Default")
+        setOrder("")
+        setDate("")
     }
 
     // function that handles the previous pagination button
@@ -57,8 +57,8 @@ const Home = () => {
         e.preventDefault()
         setCategory(e.target.value)
         setSearchItems("")
-        setOrder("Default")
-        setDate("Default")
+        setOrder("")
+        setDate("")
     }
 
     // function that handles the order select
@@ -67,7 +67,7 @@ const Home = () => {
         setOrder(e.target.value)
         setCategory("")
         setSearchItems("")
-        setDate("Default")
+        setDate("")
     }
 
     // function that handles the date select

@@ -4,7 +4,7 @@ export const getTemplates: any = createAsyncThunk(
     "home/getTemplates",
     async (searchItems) => {
         const response = await fetch(
-            `https://front-end-task-dot-result-analytics-dot-fpls-dev.uc.r.appspot.com/api/v1/public/task_templates?q=${searchItems}`
+            `${process.env.REACT_APP_BASE_URL}?q=${searchItems}`
         )
         if (response.ok) {
             const templates = await response.json()

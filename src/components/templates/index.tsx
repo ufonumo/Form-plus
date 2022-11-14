@@ -1,4 +1,4 @@
-import { Card } from "../../components"
+import { Card } from ".."
 
 interface ITemplatesProps {
     currentTemplate: any
@@ -37,7 +37,7 @@ const Templates = ({
         )
     }
 
-    if (order === "Ascending" || date) {
+    if (order === "Ascending") {
         sortedTemplates = currentTemplate.sort(function (a: any, b: any) {
             var nameA = a.name.toLowerCase(),
                 nameB = b.name.toLowerCase()
@@ -45,14 +45,46 @@ const Templates = ({
             if (nameA > nameB) return 1
             return 0
         })
-    } else if (order === "Descending") {
-        sortedTemplates = currentTemplate.reverse()
+    } else if (order === "Descending" || date === "Descending") {
+        sortedTemplates = currentTemplate
+            ?.sort(function (a: any, b: any) {
+                var nameA = a.name.toLowerCase(),
+                    nameB = b.name.toLowerCase()
+                if (nameA < nameB) {
+                    //sort string ascending
+                    return -1
+                }
+                if (nameA > nameB) {
+                    return 1
+                }
+                return 0
+                //default return value (no sorting)
+            })
+            .reverse()
+    }
+
+    if (date === "Ascending") {
+        sortedTemplates = currentTemplate.sort(function (a: any, b: any) {
+            var nameA = new Date(a.created),
+                nameB = new Date(b.created)
+            return nameA.getTime() - nameB.getTime()
+        })
+    } else if (date === "Descending") {
+        sortedTemplates = currentTemplate
+            .sort(function (a: any, b: any) {
+                var nameA = new Date(a.created),
+                    nameB = new Date(b.created)
+                return nameA.getTime() - nameB.getTime()
+            })
+            .reverse()
     }
 
     return (
         <div className="home__cards">
             {!searchItems &&
                 !category &&
+                !order &&
+                !date &&
                 currentTemplate.map((template: any, index: number) => (
                     <Card
                         key={index}
@@ -90,7 +122,17 @@ const Templates = ({
                         key={index}
                         title={template?.name}
                         subtext={template?.description}
-                        footerText="Use Template"
+                        footerText="Use Template "
+                        link={template?.link}
+                    />
+                ))}
+            {date &&
+                sortedTemplates.map((template: any, index: number) => (
+                    <Card
+                        key={index}
+                        title={template?.name}
+                        subtext={template?.description}
+                        footerText="Use Template "
                         link={template?.link}
                     />
                 ))}
