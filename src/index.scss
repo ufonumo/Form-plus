@@ -1,0 +1,71 @@
+* {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.home__container {
+    padding: 3rem 4rem;
+    @media screen and (max-width: 768px) {
+        padding: 1rem;
+    }
+    .home__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+        .home__sortBy {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            @media screen and (max-width: 768px) {
+                margin-top: 1rem;
+            }
+            @media screen and (max-width: 526px) {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+            .home__sortBy--title {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                text-align: center;
+                color: #989898;
+                width: 60%;
+            }
+        }
+    }
+    .home__card--container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .template__name {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 23px;
+            color: #3f3e3e;
+        }
+        .template__found {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: right;
+            color: #989898;
+            @media screen and (max-width: 526px) {
+                font-size: 12px;
+            }
+        }
+    }
+    .home__cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 3rem;
+        @media screen and (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media screen and (max-width: 526px) {
+            grid-template-columns: 1fr;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.field__set {
+    border: 0.5px solid #c4c4c4;
+    border-radius: 2px;
+    width: 100%;
+    .field__legend {
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 13px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.01em;
+        color: #8f8b8b;
+    }
+    .field__select {
+        border: none;
+        width: 100%;
+        outline: none;
+    }
+}
